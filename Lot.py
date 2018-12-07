@@ -14,11 +14,12 @@ deviceCon = DBConnection()
 if deviceCon.createConnection():
     print("Conection successfully")
 
-# setting up the base tables for the database
-deviceCon.setupTables()
+def setupApp():
+    # setting up the base tables for the database
+    deviceCon.setupTables()
 
-# registering the lot with the manager
-requests.get('http://localhost:8000/registerDevice',params={'deviceID':'1'})
+    # registering the lot with the manager
+    requests.get('http://localhost:8000/registerDevice',params={'deviceID':'1'})
 
 
 
@@ -46,6 +47,7 @@ def receiveAction():
 
 
 if __name__  == "__main__":
-    app.run(host='0.0.0.0',port=7000,debug=True)
+    setupApp()
+    app.run(host='0.0.0.0',port=7000,debug=True,use_reloader=False)
 
 
