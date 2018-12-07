@@ -3,6 +3,7 @@ from dbConnection import DBConnection
 from flask import Flask
 from flask import request
 from datetime import datetime
+from status_led import status_change_led
 import requests
 
 app = Flask(__name__)
@@ -39,7 +40,8 @@ def receiveAction():
     result = -1
     # result if the parking parking lot had available slots or not
     result = request.args.get('result')
-    print("The decision for the lot is: " +result)
+    print("The decision for the lot is: " + result)
+    status_change_led(int(result), 16, 15)
     return str(result)
 
 
