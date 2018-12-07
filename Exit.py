@@ -4,6 +4,7 @@ from flask import Flask
 from datetime import datetime
 import requests
 from flask import request
+from status_led import status_change_led
 
 
 app = Flask(__name__)
@@ -27,7 +28,7 @@ def home():
 @app.route("/receiveStateChange")
 def receiveStateChange():
     exitSensor.receiveStateChange()
-    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    #timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     #deviceCon.executeQuery("""Insert into lot_Info(lot_ID,is_available,lot_timestamp) VALUES (%s,%s,%s)""",(lotSensor.deviceID,lotSensor.state,timestamp))
     requests.get('http://localhost:8000/receiveStateChange', params={'device': 'exit'})
@@ -41,5 +42,6 @@ def receiveAction():
 
 if __name__  == "__main__":
     app.run(host='0.0.0.0',port=6000,debug=True)
+    status_change_led(1,16,15)
 
 
