@@ -36,6 +36,7 @@ def receiveStateChange():
         requests.get('http://localhost:5000/receiveAction',params={'result':res})
     elif device == 'exit':
         requests.get('http://localhost:6000/receiveAction', params={'result': 1})
+        lotManager.lotsAvailable += 1
     else:
         print("No device")
     return "State Updated"
@@ -60,7 +61,9 @@ def deregisterDevice():
 @app.route("/checkAvailableSlots")
 def checkAvailableSlots():
     if lotManager.lotsAvailable > 0:
-        return str(lotManager.lotsAvailable)
+        currStatus = lotManager.lotsAvailable
+        lotManager.lotsAvailable -= 1
+        return str(currStatus)
     return "0"
 
 
