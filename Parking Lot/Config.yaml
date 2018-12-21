@@ -1,0 +1,15 @@
+manager_address: 10.0.0.1
+parking_lot_count: 1
+entry_gate:
+ operation_mode: burst
+ state_variable: discrete
+ code: |
+ # ...
+exit_gate:
+ operation_mode: burst
+ state_variable: discrete
+ code: |
+ # ...
+parking_lot:
+ operation_mode: burst
+ state_variable: discrete
